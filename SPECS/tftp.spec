@@ -1,14 +1,13 @@
 Summary: 	The client and server for the Trivial File Transfer Protocol (TFTP)
 Name: 		tftp
 Version: 	5.0
-Release: 	%mkrel 5
+Release: 	%mkrel 6
 License: 	BSD
 Group: 		System/Servers
 URL:		http://www.kernel.org/pub/software/network/tftp/
 Source0: 	http://www.kernel.org/pub/software/network/tftp/tftp-hpa-%{version}.tar.gz
 Source1: 	tftp-xinetd
 Patch0:		tftp-mips.patch
-BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 The Trivial File Transfer Protocol (TFTP) is normally used only for booting
@@ -30,7 +29,7 @@ diskless workstations.  The tftp-server package provides the server for TFTP,
 which allows users to transfer files to and from a remote machine. TFTP
 provides very little security, and should not be enabled unless it is
 expressly needed. The TFTP server is run from %{_sysconfdir}/xinetd.d/tftp,
-and is disabled by default on a Mandriva Linux systems.
+and is disabled by default on a %{_vendor} systems.
 
 %prep
 
