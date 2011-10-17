@@ -1,13 +1,15 @@
+%define		subrel 1
 Summary: 	The client and server for the Trivial File Transfer Protocol (TFTP)
 Name: 		tftp
 Version: 	5.0
-Release: 	%mkrel 6
+Release: 	%mkrel 7
 License: 	BSD
 Group: 		System/Servers
 URL:		http://www.kernel.org/pub/software/network/tftp/
 Source0: 	http://www.kernel.org/pub/software/network/tftp/tftp-hpa-%{version}.tar.gz
 Source1: 	tftp-xinetd
 Patch0:		tftp-mips.patch
+Patch5: 	tftp-hpa-0.49-fortify-strcpy-crash.patch
 
 %description
 The Trivial File Transfer Protocol (TFTP) is normally used only for booting
@@ -35,6 +37,7 @@ and is disabled by default on a %{_vendor} systems.
 
 %setup -q  -n tftp-hpa-%{version}
 %patch0 -p1
+%patch5 -p1 -b .fortify-strcpy-crash
 
 %build
 
@@ -81,5 +84,4 @@ rm -rf %{buildroot}
 %config(noreplace) %{_sysconfdir}/xinetd.d/tftp
 %{_sbindir}/in.tftpd
 %{_mandir}/man8/*
-
 
