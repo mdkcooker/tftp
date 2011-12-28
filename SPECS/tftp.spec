@@ -65,8 +65,6 @@ perl -pi -e '
 %make
 
 %install
-rm -rf %{buildroot}
-
 mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_mandir}/man{1,8}
 mkdir -p %{buildroot}%{_sbindir}
@@ -81,16 +79,11 @@ install -m644 %{SOURCE1} -D %{buildroot}%{_sysconfdir}/xinetd.d/tftp
 %preun server
 %_preun_service %{name}
 
-%clean
-rm -rf %{buildroot}
-
 %files
-%defattr(-,root,root)
 %{_bindir}/tftp
 %{_mandir}/man1/*
 
 %files server
-%defattr(-,root,root)
 %doc README README.security CHANGES
 %dir %{_localstatedir}/lib/tftpboot
 %config(noreplace) %{_sysconfdir}/xinetd.d/tftp
