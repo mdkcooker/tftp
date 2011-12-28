@@ -1,7 +1,7 @@
 Summary: 	The client and server for the Trivial File Transfer Protocol (TFTP)
 Name: 		tftp
 Version: 	5.2
-Release: 	%mkrel 1
+Release: 	%mkrel 2
 License: 	BSD
 Group: 		System/Servers
 URL:		http://www.kernel.org/pub/software/network/tftp/
@@ -72,12 +72,6 @@ mkdir -p %{buildroot}%{_sbindir}
 make INSTALLROOT=%{buildroot} MANDIR=%{_mandir} install
 install -m755 -d %{buildroot}%{_localstatedir}/lib/tftpboot/
 install -m644 %{SOURCE1} -D %{buildroot}%{_sysconfdir}/xinetd.d/tftp
-
-%post server
-%_post_service %{name}
-
-%preun server
-%_preun_service %{name}
 
 %files
 %{_bindir}/tftp
