@@ -1,7 +1,7 @@
 Summary: 	The client and server for the Trivial File Transfer Protocol (TFTP)
 Name: 		tftp
 Version: 	5.2
-Release: 	%mkrel 5
+Release: 	%mkrel 6
 License: 	BSD
 Group: 		System/Servers
 URL:		http://www.kernel.org/pub/software/network/tftp/
