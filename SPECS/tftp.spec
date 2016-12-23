@@ -34,8 +34,6 @@ unless it is expressly needed.
 Summary:	The server for the Trivial File Transfer Protocol (TFTP)
 Group:		System/Servers
 Requires:	xinetd
-Requires(post):	rpm-helper
-Requires(preun):rpm-helper
 
 %description	server
 The Trivial File Transfer Protocol (TFTP) is normally used only for
