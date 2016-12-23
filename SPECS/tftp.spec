@@ -49,7 +49,7 @@ autoreconf -fsv -I.
 %build
 %serverbuild
 %configure
-%make
+%make MCONFIG all
 
 %install
 mkdir -p %{buildroot}%{_bindir}
