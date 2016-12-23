@@ -58,7 +58,7 @@ mkdir -p %{buildroot}%{_mandir}/man{1,8}
 mkdir -p %{buildroot}%{_sbindir}
 
 make INSTALLROOT=%{buildroot} MANDIR=%{_mandir} install
-install -m755 -d %{buildroot}%{_localstatedir}/lib/tftpboot/
+install -m755 -d %{buildroot}%{_sharedstatedir}/tftpboot/
 install -m644 %{SOURCE1} -D %{buildroot}%{_sysconfdir}/xinetd.d/tftp
 
 %files
@@ -67,7 +67,7 @@ install -m644 %{SOURCE1} -D %{buildroot}%{_sysconfdir}/xinetd.d/tftp
 
 %files server
 %doc README README.security CHANGES
-%dir %{_localstatedir}/lib/tftpboot
+%dir %{_sharedstatedir}/tftpboot
 %config(noreplace) %{_sysconfdir}/xinetd.d/tftp
 %{_sbindir}/in.tftpd
 %{_mandir}/man8/*
