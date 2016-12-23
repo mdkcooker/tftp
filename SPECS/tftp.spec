@@ -59,6 +59,8 @@ mkdir -p %{buildroot}%{_sbindir}
 make INSTALLROOT=%{buildroot} MANDIR=%{_mandir} install
 install -m755 -d %{buildroot}%{_sharedstatedir}/tftpboot/
 install -m644 %{SOURCE1} -D %{buildroot}%{_sysconfdir}/xinetd.d/tftp
+install -p -m644 %{SOURCE1} -D ${RPM_BUILD_ROOT}%{_unitdir}/tftp.socket
+install -p -m644 %{SOURCE2} -D ${RPM_BUILD_ROOT}%{_unitdir}/tftp.service
 
 %files
 %{_bindir}/tftp
@@ -70,5 +72,4 @@ install -m644 %{SOURCE1} -D %{buildroot}%{_sysconfdir}/xinetd.d/tftp
 %config(noreplace) %{_sysconfdir}/xinetd.d/tftp
 %{_sbindir}/in.tftpd
 %{_mandir}/man8/*
-
-
+%{_unitdir}/*
