@@ -1,7 +1,7 @@
 Summary: 	The client and server for the Trivial File Transfer Protocol (TFTP)
 Name: 		tftp
 Version: 	5.2
-Release: 	%mkrel 7
+Release: 	%mkrel 8
 License: 	BSD
 Group: 		System/Servers
 URL:		http://www.kernel.org/pub/software/network/tftp/
@@ -43,8 +43,7 @@ enabled unless it is expressly needed.  The TFTP server is run by using
 systemd socket activation, and is disabled by default.
 
 %prep
-%setup -q  -n tftp-hpa-%{version}
-%autopatch -p1
+%autosetup -p1 -n tftp-hpa-%{version}
 autoreconf -fsv -I.
 
 %build
