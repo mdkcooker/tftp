@@ -33,7 +33,6 @@ unless it is expressly needed.
 %package	server
 Summary:	The server for the Trivial File Transfer Protocol (TFTP)
 Group:		System/Servers
-Requires:	xinetd
 
 %description	server
 The Trivial File Transfer Protocol (TFTP) is normally used only for
