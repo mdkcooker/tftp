@@ -7,6 +7,8 @@ Group: 		System/Servers
 URL:		http://www.kernel.org/pub/software/network/tftp/
 Source0: 	http://www.kernel.org/pub/software/network/tftp/tftp-hpa/tftp-hpa-%{version}.tar.bz2
 Source1: 	tftp-xinetd
+Source2:	tftp.socket
+Source3:	tftp.service
 Patch0: 	tftp-mips.patch
 Patch1: 	tftp-0.40-remap.patch
 Patch2: 	tftp-hpa-0.39-tzfix.patch
@@ -15,11 +17,16 @@ Patch4: 	tftp-0.49-chk_retcodes.patch
 Patch5: 	tftp-hpa-0.49-fortify-strcpy-crash.patch
 Patch6: 	tftp-0.49-cmd_arg.patch
 Patch7: 	tftp-hpa-0.49-stats.patch
+Patch8:		tftp-hpa-5.2-pktinfo.patch
+Patch9:		tftp-doc.patch
+Patch10:	tftp-enhanced-logging.patch
+
+BuildRequires:	tcp_wrappers-devel readline-devel
 
 %description
 The Trivial File Transfer Protocol (TFTP) is normally used only for booting
 diskless workstations. The tftp package provides the user interface for TFTP,
-which allows users to transfer files to and from a remote machine. This
+which allows users to transfer filesn  to and from a remote machine. This
 program, and TFTP, provide very little security, and should not be enabled
 unless it is expressly needed.
 
@@ -31,37 +38,21 @@ Requires(post):	rpm-helper
 Requires(preun):rpm-helper
 
 %description	server
-The Trivial File Transfer Protocol (TFTP) is normally used only for booting
-diskless workstations.  The tftp-server package provides the server for TFTP,
-which allows users to transfer files to and from a remote machine. TFTP
-provides very little security, and should not be enabled unless it is
-expressly needed. The TFTP server is run from %{_sysconfdir}/xinetd.d/tftp,
-and is disabled by default on a %{_vendor} systems.
+The Trivial File Transfer Protocol (TFTP) is normally used only for
+booting diskless workstations.  The tftp-server package provides the
+server for TFTP, which allows users to transfer files to and from a
+remote machine. TFTP provides very little security, and should not be
+enabled unless it is expressly needed.  The TFTP server is run by using
+systemd socket activation, and is disabled by default.
 
 %prep
-
 %setup -q  -n tftp-hpa-%{version}
-%patch0 -p1
-%patch1 -p1 -b .zero
-%patch2 -p1 -b .tzfix
-%patch3 -p1 -b .tftpboot
-%patch4 -p1 -b .chk_retcodes
-%patch5 -p1 -b .fortify-strcpy-crash
-%patch6 -p1 -b .cmd_arg
-%patch7 -p1 -b .stats
+%autopatch -p1
+autoreconf -fsv -I.
 
 %build
-
 %serverbuild
-
-sh configure --prefix=%{_prefix}
-perl -pi -e '
-    s,^CC=.*$,CC=cc,;
-    s,^BINDIR=.*$,BINDIR=%{_bindir},;
-    s,^MANDIR=.*$,MANDIR=%{_mandir},;
-    s,^SBINDIR=.*$,SBINDIR=%{_sbindir},;
-    ' MCONFIG
-
+%configure
 %make
 
 %install
